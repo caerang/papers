@@ -1,13 +1,19 @@
 {{ define "main" }}
   <h2>{{ .Title }}</h2>
   <ul>
-    {{ range .Pages.ByDate.Reverse }}
-      <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <small> - {{ .Date.Format "2006-01-02" }}</small>
-      </li>
+    {{ if eq .Kind "taxonomy" }}
+      {{ range .Pages }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
     {{ else }}
-      <li>No posts yet.</li>
+      {{ range .Pages.ByDate.Reverse }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <small> - {{ .Date.Format "2006-01-02" }}</small>
+        </li>
+      {{ else }}
+        <li>No posts yet.</li>
+      {{ end }}
     {{ end }}
   </ul>
 {{ end }}

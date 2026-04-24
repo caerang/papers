@@ -1,5 +1,13 @@
 {{ define "main" }}
   {{ .Content }}
+  {{ with site.GetPage "/tags" }}
+    <h2>tags</h2>
+    <p class="tags-on-home">
+      {{ range .Pages }}
+        <a class="tag" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ end }}
+    </p>
+  {{ end }}
   <h2>Recent Posts</h2>
   <ul>
     {{ $pages := where .Site.RegularPages "Params.showOnHome" true }}
@@ -7,6 +15,17 @@
       <li>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         <small> - {{ .Date.Format "2006-01-02" }}</small>
+        {{ with .Params.tags }}
+          <span class="post-tags">
+            [
+            {{ range $i, $t := . }}
+              {{ if $i }}, {{ end }}
+              {{ $slug := $t | urlize }}
+              <a href="{{ printf "/tags/%s/" $slug | relURL }}">{{ $t }}</a>
+            {{ end }}
+            ]
+          </span>
+        {{ end }}
       </li>
     {{ else }}
       <li>No posts yet.</li>

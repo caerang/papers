@@ -2,6 +2,14 @@
   <article>
     <h2>{{ .Title }}</h2>
     <p><small>{{ .Date.Format "2006-01-02" }}</small></p>
+    {{ with .Params.tags }}
+      <p class="tags-on-home">
+        {{ range . }}
+          {{ $slug := . | urlize }}
+          <a class="tag" href="{{ printf "/tags/%s/" $slug | relURL }}">{{ . }}</a>
+        {{ end }}
+      </p>
+    {{ end }}
     {{ .Content }}
   </article>
 {{ end }}

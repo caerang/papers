@@ -10,11 +10,24 @@
       a:hover { text-decoration: underline; }
       header, footer { color: #666; }
       ul { padding-left: 1.2rem; }
+      .site-nav { margin: 0.5rem 0 1rem; display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: center; font-size: 0.95rem; }
+      .site-nav a { font-weight: 600; text-transform: lowercase; }
+      .site-nav span { color: #ccc; user-select: none; }
+      .tags-on-home { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; margin: 0.75rem 0 1.25rem; }
+      .tags-on-home .tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; background: #f0f4f8; font-size: 0.85rem; }
+      .tags-on-home .tag:hover { background: #e2ecf4; }
+      .post-tags { margin-left: 0.35rem; font-size: 0.85rem; color: #555; }
+      .post-tags a { font-weight: 500; }
     </style>
   </head>
   <body>
     <header>
       <h1><a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></h1>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="{{ "/" | relURL }}">home</a><span>|</span>
+        <a href="{{ "/blog/" | relURL }}">blog</a><span>|</span>
+        <a href="{{ "/tags/" | relURL }}">tags</a>
+      </nav>
       <hr />
     </header>
     <main>{{ block "main" . }}{{ end }}</main>
