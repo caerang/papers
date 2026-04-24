@@ -3,6 +3,7 @@ title= "Your Post Title"
 date= "2026-04-23T12:00:00+09:00"
 tags= ["post"]  
 draft= false
+showOnHome = true
 +++
 
 초기 배포 테스트
