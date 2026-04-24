@@ -1,13 +1,15 @@
 {{ define "main" }}
+  {{ .Content }}
   <h2>Recent Posts</h2>
   <ul>
-    {{ range where .Site.RegularPages "Type" "blog" }}
+    {{ $pages := where .Site.RegularPages "Params.showOnHome" true }}
+    {{ range $pages.ByDate.Reverse }}
       <li>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         <small> - {{ .Date.Format "2006-01-02" }}</small>
       </li>
     {{ else }}
-      <li>No blog posts found.</li>
+      <li>No posts yet.</li>
     {{ end }}
   </ul>
 {{ end }}
